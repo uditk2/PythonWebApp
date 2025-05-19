@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <h2>Example Dashboard Page</h2>
+    <p class="lead">This page demonstrates a different layout with sidebar navigation.</p>
+
+    <div class="row my-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Mermaid Diagram Example
+                </div>
+                <div class="card-body">
+                    <div class="mermaid">
+                        flowchart LR
+                            A[Start] --> B{Is sidebar?}
+                            B -->|Yes| C[Show sidebar]
+                            B -->|No| D[Show top nav]
+                            C --> E[Render content]
+                            D --> E
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    API Data Example
+                </div>
+                <div class="card-body">
+                    <p>This data is loaded from the API:</p>
+                    <div id="apiData" class="alert alert-info">
+                        Loading data...
+                    </div>
+                    <button id="loadDataBtn" class="btn btn-primary btn-sm">Refresh Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load API data on page load
+        loadApiData();
+
+        // Add event listener to the button
+        document.getElementById('loadDataBtn').addEventListener('click', loadApiData);
+    });
+
+    function loadApiData() {
+        fetch('/example/data')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('apiData').textContent = data.message;
+            })
+            .catch(error => {
+                document.getElementById('apiData').textContent = 'Error loading data';
+                console.error('Error:', error);
+            });
+    }
+</script>
+{% endblock %}

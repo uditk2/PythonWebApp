@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">Welcome to {{ settings.PROJECT_NAME }}</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">{{ settings.PROJECT_DESCRIPTION }}</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="/example" class="btn btn-primary btn-lg px-4 gap-3">View Example Page</a>
+            <a href="/docs" class="btn btn-outline-secondary btn-lg px-4">API Docs</a>
+        </div>
+    </div>
+    
+    <!-- Mermaid diagram example -->
+    <div class="mt-5">
+        <h3>Project Architecture</h3>
+        <div class="mermaid">
+            graph TD;
+                Client-->|HTTP Request|FastAPI;
+                FastAPI-->|Process Request|Routes;
+                Routes-->|Render|Templates;
+                Routes-->|Return Data|JSON;
+                Templates-->|Use|Layouts;
+                Templates-->|Include|Components;
+        </div>
+    </div>
+</div>
+{% endblock %}

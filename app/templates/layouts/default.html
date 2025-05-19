@@ -1,0 +1,15 @@
+{% if navbar == "top_fixed" %}
+    {% include "components/navbar_top_fixed.html" %}
+{% elif navbar == "top_scroll" %}
+    {% include "components/navbar_top_scroll.html" %}
+{% endif %}
+
+<div class="container{% if navbar == 'top_fixed' %} mt-5 pt-3{% endif %}">
+    <div class="row">
+        <div class="col">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+{% include "components/footer.html" %}
